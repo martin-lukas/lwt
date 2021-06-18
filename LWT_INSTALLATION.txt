@@ -1,0 +1,196 @@
+LWT_INSTALLATION.txt
+========================
+Last updated Oct 19 2020
+========================
+
+#############
+1. Windows 10
+#############
+
+1a. Possibility (a): Installation EasyPHP & LWT on Win10
+========================================================
+
+Step 1a: Download MSVCR110.dll from https://www.microsoft.com/en-us/download/details.aspx?id=30679 
+Step 1b: Choose the x86 version and download.
+Step 1c: Run the installer vcredist_x86.exe in the Downloads folder.
+
+Step 2a: Go to http://www.easyphp.org/easyphp-devserver.php.
+Step 2b: Download "EasyPHP DevServer 17.0".
+Step 2c: Open your Downloads folder and run the downloaded EasyPHP-Devserver-17.0-setup.exe into C:\Program Files (x86)\EasyPHP-Devserver-17.
+
+Step 3: Go to https://sourceforge.net/projects/learning-with-texts/files/ and download the latest zip archive learning_with_texts_2_0_1_complete.zip. Unzip it.
+
+Step 4a: Copy the zip archive lwt_v_2_0_1.zip into the directory eds-www below the EasyPHP installation directory, i.e. C:\Program Files (x86)\EasyPHP-Devserver-17\eds-www.
+Step 4b: Now right-click on the zip archive and select "Extract all", and unzip everything into a new folder C:\Program Files (x86)\EasyPHP-Devserver-17\eds-www\lwt_v_2_0_1. 
+Step 4c: Rename the folder lwt_v_2_0_1 to lwt.
+Step 4d: The zip archive C:\Program Files (x86)\EasyPHP-Devserver-17\eds-www\lwt_v_2_0_1.zip may be deleted.
+
+Step 5: Now go into C:\Program Files (x86)\EasyPHP-Devserver-17\eds-www\lwt. Rename the file "connect_easyphp.inc.php" to "connect.inc.php". (Sometimes the "php" extension is hidden, so be careful! You can display file extensions via the Windows Explorer settings and check it.)
+
+Step 6a: Start EasyPHP via Desktop Icon (Devserver 17). In the Task Bar near the clock appears the EasyPHP app icon (it may be hidden!).
+Step 6b: LWT can now be started. Right-Click on the EasyPHP icon in the taskbar, choose "Servers->Start/Restart all Servers", open a browser, and open http://127.0.0.1/lwt (please bookmark).
+
+Step 7: You may now install the LWT demo database, or define the first language you want to learn. 
+
+If you start up Windows, you must repeat Step 6a+b. 
+
+If you want to start EasyPHP every time you start Windows and avoid Step 6a, put an EasyPHP link into C:\Users\(YourUID)\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup. 
+
+Now you must only do step 6b to start LWT.
+
+1b. Possibility (b): Installation XAMPP & LWT on Win10
+======================================================
+
+Step 1a: Go to https://www.apachefriends.org/download.html .
+Step 1b: Download "XAMPP for Windows 7.3.6 (64 bit)" (or higher).
+Step 1c: Open your Downloads folder and run the downloaded xampp-windows-x64-7.3.6-2-VC15-installer.exe. Please install the components Apache, MySQL, PHP and phpMyAdmin into the folder C:\xampp.
+
+Step 2: Go to https://sourceforge.net/projects/learning-with-texts/files/ and download the latest zip archive learning_with_texts_2_0_1_complete.zip. Unzip it.
+
+Step 3a: Copy the zip archive lwt_v_2_0_1.zip from the Downloads folder into the directory htdocs below the XAMPP installation directory, i.e. C:\xampp\htdocs.
+Step 3b: Now right-click on the zip archive and select "Extract all", and unzip everything into a new folder C:\xampp\htdocs\lwt_v_2_0_1. 
+Step 3c: Rename the folder lwt_v_2_0_1 to lwt.
+Step 3d: The zip archive C:\xampp\htdocs\lwt_v_2_0_1.zip may be deleted.
+
+Step 4a: Now go into C:\xampp\htdocs\lwt. Rename the file "connect_xampp.inc.php" to "connect.inc.php". (Sometimes the "php" extension is hidden, so be careful! You can display file extensions via the Windows Explorer settings and check it.)
+Step 4b: You might need an older version of PHP than is included in XAMPP. You can download it and unpack it into a folder next to php, and name it something like php-7.3.28.
+Step 4c: Then add this to the end of file (accessible from XAMPP control panel Apache > Config > httpd-xampp.conf):
+
+ScriptAlias /php73 "C:\xampp\php-7.3.28"
+Action application/x-httpd-php73-cgi /php73/php-cgi.exe
+<Directory "C:\xampp\php-7.3.28">
+	AllowOverride None
+	Options None
+	Require all denied
+	<Files "php-cgi.exe">
+		Require all granted
+	</Files>
+</Directory>
+
+<Directory "C:\xampp\htdocs\lwt">
+    <FilesMatch "\.php$">
+        SetHandler application/x-httpd-php73-cgi
+    </FilesMatch>
+</Directory>
+
+Listen 8056
+<VirtualHost *:8056>
+    <FilesMatch "\.php$">
+        SetHandler application/x-httpd-php73-cgi
+    </FilesMatch>
+</VirtualHost>
+
+Step 4d: Change line in php.ini (Accessible from XAMPP control panel Apache > Config > php.ini) to this:
+
+extension_dir="ext"
+
+Step 5a: Start the "XAMPP Control Panel" (C:\xampp\xampp-control.exe) and start the two modules Apache and MySQL. Now the two module names should have a green background color. 
+Step 5b: LWT can now be started. Open a browser, and open http://localhost/lwt (please bookmark).
+
+Step 6: You may now install the LWT demo database, or define the first language you want to learn. 
+
+If you start up Windows, you must repeat Step 5a+b. 
+
+If you want to start "XAMPP Control Panel" every time you start Windows and to avoid Step 5a, put a "XAMPP Control Panel" link to C:\xampp\xampp-control.exe into C:\Users\(YourUID)\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup. To autostart also the Apache and MySQL modules, please open "Config" within the XAMPP Control Panel and check the two checkboxes.
+
+Now you must only do step 5b to start LWT.
+
+###############
+2. macOS 10.10+
+###############
+
+Step 1: Go to http://www.mamp.info/en/downloads/.
+
+Step 2: Download "MAMP & MAMP PRO" (currently MAMP_MAMP_PRO_5.7.pkg).
+
+Step 3: Double-click on the downloaded installation package MAMP_MAMP_PRO_5.7.pkg, accept the license, click on "Install for all users..." and on "Continue", on the next panel titled "Standard Install on Macintosh HD" click on "Customize", deselect "MAMP PRO", and click Install. You must enter your password. After this step MAMP is installed within a folder named "MAMP" in the Applications folder.
+
+Step 4: Go to https://sourceforge.net/projects/learning-with-texts/files/ and download the latest zip archive learning_with_texts_2_0_1_complete.zip. Unzip it.
+
+Step 5: Copy the zip archive lwt_v_2_0_1.zip into the directory htdocs below the MAMP directory, i.e. /Applications/MAMP/htdocs. 
+Doubleclick on the zip archive to unzip; a new folder lwt_v_2_0_1 will be created in htdocs.
+
+Step 6: Rename the new folder lwt_v_2_0_1 to lwt. The zip archive lwt_v_2_0_1.zip may be deleted.
+
+Step 7: Go to /Applications/MAMP/htdocs/lwt. Rename the file connect_mamp.inc.php to connect.inc.php.
+
+Step 8: Open MAMP.app in /Applications/MAMP. Accept the messages from the firewall. Apache and MySQL start automatically.
+
+Step 9: LWT can now be started in your web browser, go to: http://localhost:8888/lwt.
+
+Step 10: You may install the LWT demo database, or define the first language you want to learn. 
+
+If you want to use LWT again, just do step 8 and 9.
+The local webserver (MAMP) will be automatically stopped by quitting the MAMP application. 
+
+#######################################################
+3. Linux (tested on Ubuntu 20.04.1 LTS & Linux Mint 20)
+#######################################################
+
+Step 1: Open a Terminal, type and execute the following commands:
+
+Step 1a: Installation of LAMP:
+
+sudo apt-get update
+
+sudo apt-get install apache2 libapache2-mod-php php php-mbstring php-mysql mysql-server
+
+Step 1b: Set MySQL root Password to "abcxyz" 
+
+sudo mysql
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'abcxyz';
+FLUSH privileges;
+QUIT; 
+
+Step 1c: Check MySQL access:
+
+mysql -u root -p
+abcxyz
+(if you see the MySQL prompt 'mysql>', everything is OK)
+QUIT;
+
+Step 2: Open a browser and go to https://sourceforge.net/projects/learning-with-texts/files/ and download the latest zip archive learning_with_texts_2_0_1_complete.zip. Unzip it.
+
+Step 3: Now unzip the archive lwt_v_2_0_1.zip.
+
+Step 4: Rename the new directory lwt_v_2_0_1 to lwt. The zip archive lwt_v_2_0_1.zip may be deleted.
+
+Step 5: Rename the file connect_xampp.inc.php in /[... Path to downloaded LWT ...]/lwt to connect.inc.php.
+
+Step 6: Edit this  file connect.inc.php and set the MySQL password in line 
+$passwd = "";
+Change it to
+$passwd = "abcxyz";
+Save the edited file connect.inc.php.
+
+Step 6: Open a Terminal window, type and execute the following commands:
+
+sudo rm /var/www/html/index.html
+sudo mv /[... Path to downloaded LWT ...]/lwt /var/www/html
+sudo chmod -R 755 /var/www/html/lwt
+sudo service apache2 restart
+sudo service mysql restart
+
+Step 7: LWT can now be started in your web browser, go to: http://localhost/lwt.
+
+Step 8: You may install the LWT demo database, or define the first language you want to learn. 
+
+If you want to use LWT again, just do step 7. 
+
+#######################################
+4. Upgrade LWT
+#######################################
+
+Step 1: Backup the LWT directory. Backup your database (within LWT).
+
+Step 2: Open a browser and go to https://sourceforge.net/projects/learning-with-texts/files/ and download the latest zip archive learning_with_texts_2_0_1_complete.zip. Unzip it.
+
+Step 3: Now unzip the archive lwt_v_2_0_1.zip, and copy everything into the LWT directory.
+
+Step 4: Copy the following (if not already at its place and OK) from your LWT backup into the LWT directory: "connect.inc.php" and the whole "media" sub-directory (if you created one; contains your MP3 audio files).
+
+Step 5: Clear the web browser cache and open LWT as usual. 
+
+#######################################
+############# END #####################
+#######################################
