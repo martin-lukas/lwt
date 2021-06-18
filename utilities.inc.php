@@ -1330,9 +1330,9 @@ function get_wordstatus_radiooptions($v) {
 	$statuses = get_statuses();
 	foreach ($statuses as $n => $status) {
 		$r .= '<span class="status' . $n . '" title="' . tohtml($status["name"]) . '">';
-		$r .= '&nbsp;<input type="radio" name="WoStatus" value="' . $n . '"';
+		$r .= '<label>&nbsp;<input type="radio" name="WoStatus" value="' . $n . '"';
 		if ($v == $n) $r .= ' checked="checked"';
-		$r .= ' />' . tohtml($status["abbr"]) . "&nbsp;</span> ";
+		$r .= ' />' . tohtml($status["abbr"]) . "&nbsp;</label></span> ";
 	}
 	return $r;
 }
