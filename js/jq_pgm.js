@@ -430,19 +430,36 @@ function keydown_event_do_text_text(e) {
 		return false;
 	}
 	
-	if (e.which == 13) {  // return = edit next unknown word
+	if (e.which == 13) {  // ENTER = mark next unknown word
 		$('span.uwordmarked').removeClass('uwordmarked');
 		var unknownwordlist = $('span.status0.word:not(.hide):first');
 		if (unknownwordlist.size() == 0) return false;
 		$(window).scrollTo(unknownwordlist,{axis:'y', offset:-150});
-		unknownwordlist.addClass('uwordmarked').click();
-		cClick();
+		unknownwordlist.addClass('uwordmarked');
 		return false;
 	}
-	
+
+	if (e.which == 87) {  // W = save marked word as well-known
+		var markedWordList = $('span.uwordmarked:first');
+		if (markedWordList.size() != 0) {
+			var ord = markedWordList.attr('data_order');
+			window.parent.frames['ro'].location = 'insert_word_wellknown.php?tid=' + TID + '&ord=' + ord;
+			return false;
+		} 
+	}
+
+	if (e.which == 73) {  // I = save marked word as ignored
+		var markedWordList = $('span.uwordmarked:first');
+		if (markedWordList.size() != 0) {
+			var ord = markedWordList.attr('data_order');
+			window.parent.frames['ro'].location = 'insert_word_ignore.php?tid=' + TID + '&ord=' + ord;
+			return false;
+		}
+	}
+
 	var knownwordlist = $('span.word:not(.hide):not(.status0)' + ADDFILTER + ',span.mword:not(.hide)' + ADDFILTER);
 	var l_knownwordlist = knownwordlist.size();
-	// console.log(knownwordlist);
+
 	if (l_knownwordlist == 0) return true;
 	
 	// the following only for a non-zero known words list
