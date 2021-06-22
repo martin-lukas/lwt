@@ -41,7 +41,7 @@ var WBLINK2 = '';
 var WBLINK3 = '';
 var SOLUTION = '';
 var ADDFILTER = '';
-var RTL = 0;
+var RTL = 0; // if the text is Right To Left
 var ANN_ARRAY = {};
  
 /**************************************************************
