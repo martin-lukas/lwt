@@ -42,8 +42,8 @@ Now you must only do step 6b to start LWT.
 ======================================================
 
 Step 1a: Go to https://www.apachefriends.org/download.html .
-Step 1b: Download "XAMPP for Windows 7.3.6 (64 bit)" (or higher).
-Step 1c: Open your Downloads folder and run the downloaded xampp-windows-x64-7.3.6-2-VC15-installer.exe. Please install the components Apache, MySQL, PHP and phpMyAdmin into the folder C:\xampp.
+Step 1b: Download "XAMPP for Windows 7.3.X (64 bit)".
+Step 1c: Open your Downloads folder and run the downloaded xampp-windows-x64-7.3.X-X-VC15-installer.exe. Please install the components Apache, MySQL, PHP and phpMyAdmin into the folder C:\xampp.
 
 Step 2: Go to https://sourceforge.net/projects/learning-with-texts/files/ and download the latest zip archive learning_with_texts_2_0_1_complete.zip. Unzip it.
 
@@ -53,38 +53,8 @@ Step 3c: Rename the folder lwt_v_2_0_1 to lwt.
 Step 3d: The zip archive C:\xampp\htdocs\lwt_v_2_0_1.zip may be deleted.
 
 Step 4a: Now go into C:\xampp\htdocs\lwt. Rename the file "connect_xampp.inc.php" to "connect.inc.php". (Sometimes the "php" extension is hidden, so be careful! You can display file extensions via the Windows Explorer settings and check it.)
-Step 4b: You might need an older version of PHP than is included in XAMPP. You can download it and unpack it into a folder next to php, and name it something like php-7.3.28.
-Step 4c: Then add this to the end of file (accessible from XAMPP control panel Apache > Config > httpd-xampp.conf):
 
-ScriptAlias /php73 "C:\xampp\php-7.3.28"
-Action application/x-httpd-php73-cgi /php73/php-cgi.exe
-<Directory "C:\xampp\php-7.3.28">
-	AllowOverride None
-	Options None
-	Require all denied
-	<Files "php-cgi.exe">
-		Require all granted
-	</Files>
-</Directory>
-
-<Directory "C:\xampp\htdocs\lwt">
-    <FilesMatch "\.php$">
-        SetHandler application/x-httpd-php73-cgi
-    </FilesMatch>
-</Directory>
-
-Listen 8056
-<VirtualHost *:8056>
-    <FilesMatch "\.php$">
-        SetHandler application/x-httpd-php73-cgi
-    </FilesMatch>
-</VirtualHost>
-
-Step 4d: Change line in php.ini (Accessible from XAMPP control panel Apache > Config > php.ini) to this:
-
-extension_dir="ext"
-
-Step 5a: Start the "XAMPP Control Panel" (C:\xampp\xampp-control.exe) and start the two modules Apache and MySQL. Now the two module names should have a green background color. 
+Step 5a: Start the "XAMPP Control Panel" (C:\xampp\xampp-control.exe) and start the two modules Apache and MySQL. Now the two module names should have a green background color.
 Step 5b: LWT can now be started. Open a browser, and open http://localhost/lwt (please bookmark).
 
 Step 6: You may now install the LWT demo database, or define the first language you want to learn. 
