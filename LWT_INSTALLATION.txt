@@ -1,6 +1,6 @@
 LWT_INSTALLATION.txt
 ========================
-Last updated Oct 19 2020
+Last updated Jun 27 2021
 ========================
 
 #############
@@ -146,6 +146,33 @@ Step 7: LWT can now be started in your web browser, go to: http://localhost/lwt.
 Step 8: You may install the LWT demo database, or define the first language you want to learn. 
 
 If you want to use LWT again, just do step 7. 
+
+#####################################################################################
+3. Protect your LWT instance with basic authentication (tested on Ubuntu 20.04.2 LTS)
+#####################################################################################
+
+Step 1a: Locate the Apache server configuration file (in case of Apache 2 it's apache2.conf). In my case, it was located in /etc/apache2/.
+
+Step 1b: Edit the file with a text editor (like nano). You might have to use sudo.
+
+Step 1c: Edit the directive <Directory /var/www/> (or the one that contains you website) so it looks something like this:
+
+<Directory /var/www/>
+        Options Indexes FollowSymLinks
+        AllowOverride None
+        AuthType Basic
+        AuthName "Restricted Files"
+        AuthUserFile "/etc/apache2/.htpasswd"
+        Require valid-user
+</Directory>
+
+Step 2a: Create the AuthUserFile referenced in the previous step. You can do so with the command: htpasswd -c /etc/apache2/.htpasswd YOUR_USERNAME
+
+Step 2b: You'll be prompted to type in your password twice. After that, the file is created. If you want to add more users, use: htpasswd /etc/apache2/.htpasswd NEW_USER
+
+Step 3: Restart the Apache server with: sudo systemctl restart apache2
+
+The basic auth should work for any file in /var/www/ now. After you authenticate, the browser should automatically send further requests with the filled out "Authorization" header.
 
 #######################################
 4. Upgrade LWT
