@@ -35,8 +35,8 @@ DB variables for XAMPP
 ***************************************************************/
 
 $server = "localhost";
-$userid = "ubuntu";
-$passwd = "";
+$userid = "root";
+$passwd = "abcxyz";
 $dbname = "learning-with-texts";
 
 ?>
