@@ -35,7 +35,7 @@ Call: index.php
 LWT Start Screen / Main Menu / Home
 ***************************************************************/
 
-if (! file_exists ('connect.inc.php')) {
+if (!file_exists('connect.inc.php')) {
 	echo '<div style="padding: 1em; color:red; font-size:120%; background-color:#CEECF5;"><p><b>Fatal Error:</b> Cannot find file: "connect.inc.php". Please rename the correct file "connect_[servertype].inc.php" to "connect.inc.php" ([servertype] is the name of your server: xampp, mamp, or easyphp). Please read the documentation: https://learning-with-texts.sourceforge.io</p></div></body></html>';
 	die('');
 }
