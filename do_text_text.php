@@ -88,8 +88,8 @@ $(document).ready( function() {
 //]]>
 </script>
 <?php
-
-echo '<div id="thetext" ' .  ($rtlScript ? 'dir="rtl"' : '') . '><p style="' . ($removeSpaces ? 'word-break:break-all;' : '') . 
+// added 'keep-all' for preventing character split in languages like Korean
+echo '<div id="thetext" ' .  ($rtlScript ? 'dir="rtl"' : '') . '><p style="' . ($removeSpaces ? 'word-break: break-all;' : 'word-break: keep-all;') .
 'font-size:' . $textsize . '%;line-height: 1.4; margin-bottom: 10px;">';
 
 $currcharcount = 0;
