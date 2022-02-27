@@ -249,16 +249,16 @@ else {  // if (! isset($_REQUEST['op']))
 					</td>
 				</tr>
 				<tr>
+                    <td class="td1 right">Status:</td>
+                    <td class="td1">
+                        <?php echo get_wordstatus_radiooptions(1); ?>
+                    </td>
+				</tr>
+				<tr>
 					<td class="td1 right">Sentence<br />Term in {...}:</td>
 					<td class="td1">
 						<textarea <?php echo $scrdir; ?> name="WoSentence" class="textarea-noreturn checklength checkoutsidebmp" data_maxlength="1000" data_info="Sentence" cols="35" rows="3"><?php echo tohtml(repl_tab_nl($sent[1])); ?></textarea>
 					</td>
-				</tr>
-				<tr>
-				<td class="td1 right">Status:</td>
-				<td class="td1">
-					<?php echo get_wordstatus_radiooptions(1); ?>
-				</td>
 				</tr>
 				<tr>
 					<td class="td1 right" colspan="2">
@@ -325,15 +325,15 @@ else {  // if (! isset($_REQUEST['op']))
 						</td>
 					</tr>
 					<tr>
-						<td class="td1 right">Sentence<br />Term in {...}:</td>
-						<td class="td1">
-							<textarea <?php echo $scrdir; ?> name="WoSentence" class="textarea-noreturn checklength checkoutsidebmp" data_maxlength="1000" data_info="Sentence" cols="35" rows="3"><?php echo tohtml($sentence); ?></textarea>
-						</td>
-					</tr>
-					<tr>
 						<td class="td1 right">Status:</td>
 						<td class="td1">
 							<?php echo get_wordstatus_radiooptions($status); ?>
+						</td>
+					</tr>
+					<tr>
+						<td class="td1 right">Sentence<br />Term in {...}:</td>
+						<td class="td1">
+							<textarea <?php echo $scrdir; ?> name="WoSentence" class="textarea-noreturn checklength checkoutsidebmp" data_maxlength="1000" data_info="Sentence" cols="35" rows="3"><?php echo tohtml($sentence); ?></textarea>
 						</td>
 					</tr>
 					<tr>

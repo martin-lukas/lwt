@@ -457,6 +457,15 @@ function keydown_event_do_text_text(e) {
 		}
 	}
 
+    if (e.which == 69) { //  E = start edit of the marked unknown word
+        var markedWordList = $('span.uwordmarked:first');
+        if (markedWordList.size() != 0) {
+            var ord = markedWordList.attr('data_order');
+            window.parent.frames['ro'].location='edit_word.php?tid=' + TID + '&ord=' + ord + '&wid=';
+            return false;
+        }
+    }
+
 	var knownwordlist = $('span.word:not(.hide):not(.status0)' + ADDFILTER + ',span.mword:not(.hide)' + ADDFILTER);
 	var l_knownwordlist = knownwordlist.size();
 
