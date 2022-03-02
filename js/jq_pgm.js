@@ -379,32 +379,25 @@ function word_click_event_do_text_text() {
 			$(this).attr('data_mw9'),RTL);
 		top.frames['ro'].location.href='edit_word.php?tid=' + TID + '&ord=' + 
 			$(this).attr('data_order') + '&wid=';
-	} else {
-        if ( status == 99 ) {
-            run_overlib_status_99(WBLINK1,WBLINK2,WBLINK3,$(this).attr('title'),
-                TID,$(this).attr('data_order'),$(this).text(),$(this).attr('data_wid'),
-                $(this).attr('data_mw2'),$(this).attr('data_mw3'),$(this).attr('data_mw4'),
-                $(this).attr('data_mw5'),$(this).attr('data_mw6'),$(this).attr('data_mw7'),
-                $(this).attr('data_mw8'),$(this).attr('data_mw9'),RTL,ann);
-        } else if ( status == 98 ) {
-            run_overlib_status_98(WBLINK1,WBLINK2,WBLINK3,$(this).attr('title'),
-                TID,$(this).attr('data_order'),$(this).text(),$(this).attr('data_wid'),
-                $(this).attr('data_mw2'),$(this).attr('data_mw3'),$(this).attr('data_mw4'),
-                $(this).attr('data_mw5'),$(this).attr('data_mw6'),$(this).attr('data_mw7'),
-                $(this).attr('data_mw8'),$(this).attr('data_mw9'),RTL,ann);
-        } else { // status is 1 - 5
-            run_overlib_status_1_to_5(WBLINK1,WBLINK2,WBLINK3,$(this).attr('title'),
-                TID,$(this).attr('data_order'),$(this).text(),$(this).attr('data_wid'),status,
-                $(this).attr('data_mw2'),$(this).attr('data_mw3'),$(this).attr('data_mw4'),
-                $(this).attr('data_mw5'),$(this).attr('data_mw6'),$(this).attr('data_mw7'),
-                $(this).attr('data_mw8'),$(this).attr('data_mw9'),RTL,ann);
-        }
-        // Mark the known word for hotkey use
-        remove_all_marked();
-        var knownwordlist = $('span.word:not(.hide):not(.status0)' + ADDFILTER + ',span.mword:not(.hide)' + ADDFILTER);
-        TEXTPOS = knownwordlist.index($(this));
-        $(this).addClass('kwordmarked');
-    }
+	}
+	else if ( status == 99 )
+		run_overlib_status_99(WBLINK1,WBLINK2,WBLINK3,$(this).attr('title'),
+			TID,$(this).attr('data_order'),$(this).text(),$(this).attr('data_wid'),
+			$(this).attr('data_mw2'),$(this).attr('data_mw3'),$(this).attr('data_mw4'),
+			$(this).attr('data_mw5'),$(this).attr('data_mw6'),$(this).attr('data_mw7'),
+			$(this).attr('data_mw8'),$(this).attr('data_mw9'),RTL,ann);
+	else if ( status == 98 )
+		run_overlib_status_98(WBLINK1,WBLINK2,WBLINK3,$(this).attr('title'),
+			TID,$(this).attr('data_order'),$(this).text(),$(this).attr('data_wid'),
+			$(this).attr('data_mw2'),$(this).attr('data_mw3'),$(this).attr('data_mw4'),
+			$(this).attr('data_mw5'),$(this).attr('data_mw6'),$(this).attr('data_mw7'),
+			$(this).attr('data_mw8'),$(this).attr('data_mw9'),RTL,ann);
+	else
+		run_overlib_status_1_to_5(WBLINK1,WBLINK2,WBLINK3,$(this).attr('title'),
+			TID,$(this).attr('data_order'),$(this).text(),$(this).attr('data_wid'),status,
+			$(this).attr('data_mw2'),$(this).attr('data_mw3'),$(this).attr('data_mw4'),
+			$(this).attr('data_mw5'),$(this).attr('data_mw6'),$(this).attr('data_mw7'),
+			$(this).attr('data_mw8'),$(this).attr('data_mw9'),RTL,ann);
 	return false;
 }
 	
@@ -431,13 +424,14 @@ function keydown_event_do_text_text(e) {
 
 	if (e.which == 27) {  // esc = reset all
 		TEXTPOS = -1;
-		remove_all_marked();
+		$('span.uwordmarked').removeClass('uwordmarked');
+		$('span.kwordmarked').removeClass('kwordmarked');
 		cClick();
 		return false;
 	}
 	
 	if (e.which == 13) {  // ENTER = mark next unknown word
-		remove_all_marked();
+		$('span.uwordmarked').removeClass('uwordmarked');
 		var unknownwordlist = $('span.status0.word:not(.hide):first');
 		if (unknownwordlist.size() == 0) return false;
 		$(window).scrollTo(unknownwordlist,{axis:'y', offset:-150});
@@ -479,7 +473,7 @@ function keydown_event_do_text_text(e) {
 	
 	// the following only for a non-zero known words list
 	if (e.which == 36) {  // home : known word navigation -> first
-		remove_all_marked();
+		$('span.kwordmarked').removeClass('kwordmarked');
 		TEXTPOS = 0;
 		curr = knownwordlist.eq(TEXTPOS);
 		curr.addClass('kwordmarked');
@@ -491,7 +485,7 @@ function keydown_event_do_text_text(e) {
 		return false;
 	}
 	if (e.which == 35) {  // end : known word navigation -> last
-		remove_all_marked();
+		$('span.kwordmarked').removeClass('kwordmarked');
 		TEXTPOS = l_knownwordlist-1;
 		curr = knownwordlist.eq(TEXTPOS);
 		curr.addClass('kwordmarked');
@@ -506,7 +500,7 @@ function keydown_event_do_text_text(e) {
 		var marked = $('span.kwordmarked');
 		var currid = (marked.length == 0) ? (100000000) : 
 			get_position_from_id(marked.attr('id'));
-		remove_all_marked();
+		$('span.kwordmarked').removeClass('kwordmarked');
 		// console.log(currid);
 		TEXTPOS = l_knownwordlist - 1;
 		for (var i = l_knownwordlist - 1; i >= 0; i--) {
@@ -532,7 +526,7 @@ function keydown_event_do_text_text(e) {
 		var marked = $('span.kwordmarked');
 		var currid = (marked.length == 0) ? (-1) : 
 			get_position_from_id(marked.attr('id'));
-		remove_all_marked();
+		$('span.kwordmarked').removeClass('kwordmarked');
 		// console.log(currid);
 		TEXTPOS = 0;
 		for (var i = 0; i < l_knownwordlist; i++) {
@@ -602,11 +596,6 @@ function keydown_event_do_text_text(e) {
 	}
 
 	return true;
-}
-
-function remove_all_marked() {
-    $('span.uwordmarked').removeClass('uwordmarked');
-    $('span.kwordmarked').removeClass('kwordmarked');
 }
 
 function do_ajax_save_setting(k, v) {
